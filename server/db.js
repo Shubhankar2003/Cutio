@@ -11,7 +11,7 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
 })
 
 // Creating table with specific requirements
-export const setUP = () => {
+export const setUp = () => {
     const createTableQuery = `
     CREATE TABLE IF NOT EXISTS Links (
         ID TEXT PRIMARY KEY,
