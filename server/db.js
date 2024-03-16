@@ -92,5 +92,3 @@ export const query = async (id) => {
 }
 
 export const shutDown = () => db.close()
-
-setUp()
