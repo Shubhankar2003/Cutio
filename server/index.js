@@ -6,6 +6,7 @@ import linkRoute from './routes/link.js'
 const app = express()
 const port = 3000
 
+app.set('view engine', 'ejs')
 setUp()
 
 app.use(cors())
