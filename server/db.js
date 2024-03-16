@@ -61,3 +61,36 @@ export const insertLink = (url) => {
         console.log(error)
     }
 }
+
+export const query = async (id) => {
+    try{
+        const idRegex = /^[a-zA-Z0-9]{6}[a-z0-9]{10}$/;
+        if (!idRegex.test(id)) {
+            throw new Error('Invalid id');
+        }
+
+        const selectQuery = `
+        SELECT * FROM LINKS WHERE ID = ?
+        `
+        const row = await new Promise((resolve, reject) => {
+            db.get(selectQuery, [id], (err, row) => {
+                if(err){
+                    reject(err)
+                    return console.error(err.message)
+                }
+                if(row){
+                    resolve(row.URL)
+                }else{
+                    resolve(null)
+                }
+            })
+        })
+        return row
+    }catch (error){
+        console.error(error)
+    }
+}
+
+export const shutDown = () => db.close()
+
+setUp()
