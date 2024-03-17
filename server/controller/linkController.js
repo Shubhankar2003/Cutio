@@ -9,9 +9,11 @@ export const addLink = (req, res) => {
         console.log(id)
 
         if(id){
-            return res.status(200).send({id});
+            console.log({id})
+            res.status(200).send({id});
         }else{
-            return res.status(400).send('Failed to insert link')
+            console.log({id})
+            res.status(400).send('Failed to insert link')
         }
     }catch(error){
         console.error(error)
@@ -22,19 +24,20 @@ export const addLink = (req, res) => {
 export const getLink = async (req, res) => {
     try{
         const id = req.body.id;
-        if(id.length !== 19){
-            res.status(400).send('Invalid ID')
-            throw new Error('Invalid ID')
+        console.log(id)
+        if(id.length !== 8){
+            return res.status(400).send('Invalid ID')
         }
         const url = await query(id)
+        console.log(id)
+        console.log(url)        
         if(!url){
             res.status(404).send('No URL found for the provided ID')
-            throw new Error('No URL found for the provided ID')
         }else{
             res.status(200).send({url})
         }
     }catch(error){
-        console.log(error)
+        console.error(error);
         res.status(500).send('Internal Server Error');
     }
 }

@@ -32,10 +32,9 @@ export const setUp = () => {
 
 
 // generating unique id for each link
-function generateUniqueId(length = 6) {
+function generateUniqueId(length = 8) {
     const randomString = Math.random().toString(36).slice(2, 2 + length);
-    const timestamp = Date.now().toString(36);
-    return randomString + timestamp;
+    return randomString;
 }
 
 export const insertLink = (url) => {
@@ -49,22 +48,23 @@ export const insertLink = (url) => {
             `
             db.run(insertQuery, [id,url], (err) => {
                 if (err){
-                    console.log('Error inserting link: ', err);
+                    return console.error(err.message)
                 }else{
-                    console.log(`Link Inserted Successfully with id ${id}`);
+                    console.log(`Link Inserted Successfully with id ${id}`)
                 }
             })
+            return id
         }else{
             throw new Error('Invalid URL')
         }
     }catch(error){
-        console.log(error)
+        console.error(error)
     }
 }
 
 export const query = async (id) => {
     try{
-        const idRegex = /^[a-zA-Z0-9]{6}[a-z0-9]{10}$/;
+        const idRegex = /^[a-zA-Z0-9]{8}$/;
         if (!idRegex.test(id)) {
             throw new Error('Invalid id');
         }
