@@ -40,14 +40,14 @@ function generateUniqueId(length = 6) {
 
 export const insertLink = (url) => {
     try{
-        const urlpattern = /^(https?):\/\/(www\.)?([a-zA-Z0-9\-.]+\.)([a-zA-Z0-9-.]+)\/?([a-zA-z0-9\/?=%&-]+)?$/
-        const result = urlpattern.test(url)
+        const urlPattern = /^(https?):\/\/(www\.)?([a-zA-Z0-9\-.]+\.)([a-zA-Z0-9-.]+)\/?([a-zA-z0-9\/?=%&-]+)?$/;
+        const result = urlPattern.test(url)
         if(result){
             const id = generateUniqueId()
             const insertQuery = `
             INSERT INTO Links (ID, URL) VALUES (?, ?)
             `
-            db.run(insertLink, [id,url], (err) => {
+            db.run(insertQuery, [id,url], (err) => {
                 if (err){
                     console.log('Error inserting link: ', err);
                 }else{

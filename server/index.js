@@ -10,6 +10,7 @@ app.set('view engine', 'ejs')
 setUp()
 
 app.use(cors())
+app.use(express.json())
 
 app.use('/links', linkRoute)
 
