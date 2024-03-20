@@ -17,6 +17,11 @@ module.exports = {
       },
     },
     extend: {
+
+      fontFamily: {
+        hachi: ["Hachi Maru Pop", "cursive"],
+       },
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
